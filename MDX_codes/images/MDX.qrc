@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="logo">
+    <file>A.png</file>
+    <file>Logo.png</file>
+    <file>Develope.png</file>
+    <file>Dev.png</file>
+    <file>Go.png</file>
+    <file>petri-dish-img.png</file>
+    <file>time.png</file>
+    <file>microscope.png</file>
+  </qresource>
+  <qresource prefix="Data">
+    <file>data/Current result/Filtered.png</file>
+    <file>data/Current result/Findcircle.png</file>
+    <file>data/Current result/Original.png</file>
+    <file>data/Current result/Subtracted.png</file>
+  </qresource>
+</RCC>

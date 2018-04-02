@@ -1,0 +1,258 @@
+<html lang="en" class="">
+  <head>
+    <title>MicrobeDx Urine Test Platform Alpha</title>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    <link type="text/css" rel="stylesheet" href="./css/bootstrap.min.css"></link>
+    <script src="./js/bootstrap.min.js"></script>
+
+
+  </head>
+
+  <body>
+
+    <div name="header">
+      <!--
+      The following codes are modified from the offcial demo
+      -->
+      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <!--
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        -->
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href="https://www.microbedx.com" target ="_blank">
+          <img id="welcome" src="./images/Logo.png" height="80" width="320" style="float:left"/>
+        </a>
+        <a class="navbar-brand" href="#">MicrobeDX</a>
+        </p>
+        <form class="form-inline my-2 my-lg-0">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="os">Start System</button>
+          &nbsp;
+          <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="clear" onclick="sys_clear()">Clear</button>
+        </form>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+          <ul class="navbar-nav justify-content-center">
+            <li class="nav-item active">
+              <a class="nav-link" href="#" onclick="show_welcome()">Home <span class="sr-only">(current)</span></a>
+            </li>
+
+            <!--
+            <li class="nav-item">
+              <a class="nav-item" href="#general" onclick="$('#general').toggle()">General</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-item" href="#steps" onclick="$('#steps').toggle()">Steps</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-item" href="#parameters" onclick="$('#parameters').toggle()">Parameters</a>
+            </li>
+            -->
+            <li class="nav-item">
+              <a href="#general" class="btn btn-default" data-toggle="collapse">General</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#steps" class="btn btn-default" data-toggle="collapse">Steps</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#parameters" class="btn btn-default" data-toggle="collapse">Parameters</a>
+            </li>
+
+          </ul>
+
+          <form class="form-inline my-2 my-lg-0">
+
+            <div id="cmd">
+              <input class="form-control mr-sm-2" type="text" id="serial" placeholder="Enter serial code here"></input>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="send">Send</button>
+            </div>
+
+          </form>
+        </div>
+      </nav>
+    </div>
+
+    <p><center></p>
+    <div class="container" class="collapse in" >
+      <img id="welcome" src="./image/welcome.jpeg" onclick="hide_welcome()" height="320" width="320"/>
+    </div>
+
+    <div class="container-fluid" name="control-panel">
+      <div class="row">
+        <div class="col-xs-6">
+          <p><center></p>
+          <div id="general" class="collapse in">
+            <button type="button" id="trigger" onclick="trigger_test()">Trigger!</button>
+            <button type="button" id="stop" onclick="trigger_test_stop()">Stop!</button>
+          </div>
+          <br>
+
+          <div id="steps" class="collapse in">
+            <button type="button" class="step" id="0">Initialize</button><br><br>
+            <button type="button" class="step" id="1">Step 1</button>
+            <button type="button" class="step" id="2">Step 2</button>
+            <button type="button" class="step" id="3">Step 3</button>
+            <button type="button" class="step" id="4">Step 4</button><br><br>
+            <button type="button" class="step" id="5">Step 5</button>
+            <button type="button" class="step" id="6">Step 6</button>
+            <button type="button" class="step" id="7">Step 7</button>
+            <button type="button" class="step" id="8">Step 8</button><br><br>
+            <button type="button" class="step" id="9">Step 9</button>
+            <button type="button" class="step" id="10">Step 10</button>
+            <button type="button" class="step" id="11">Step 11</button><br><br>
+            <button type="button" class="step" id="-1">Finsih &amp Clean up</button>
+          </div>
+          <br>
+
+          <div id="parameters" class="collapse in">
+            <input type="text" id="incubation" placeholder="Enter incubation time here"></input>
+            <button type="button" id="icb-send" >Send</button>
+            <br>
+            <input type="text" id="lysis" placeholder="Enter lysis time here"></input>
+            <button type="button" id="lss-send" >Send</button>
+          </div>
+          <br>
+
+        </div>
+
+        <div class="col-xs-6" id="res"></div>
+
+      </div>
+    </div>
+
+
+
+    <script>
+
+      function show_welcome() {
+        $('#welcome').show();
+      }
+
+      function sys_clear() {
+        $('#welcome').show();
+        $('#general').collapse('hide');
+        $('#steps').collapse('hide');
+        $('#parameters').collapse('hide');
+        $('#res').html('');
+      }
+
+      function hide_welcome() {
+        $('#welcome').hide();
+      }
+
+      function trigger_test() {
+        console.log("hello world!");
+      }
+
+      function trigger_test_stop() {
+        console.log("bye bye world!");
+      }
+
+      $('#trigger').click(function(){
+          console.log("hello from the jquery!");
+          $.ajax({
+            url: "http://127.0.0.1:5000/trigger",
+            success: function(response) {
+              // here you do whatever you want with the response variable
+              console.log(response);
+              $("#res").html(response);
+            }
+          });
+        });
+
+      $('#stop').click(function(){
+          console.log("hello from the jquery!");
+          $.ajax({
+            url: "http://127.0.0.1:5000/stop",
+            success: function(response) {
+              // here you do whatever you want with the response variable
+              console.log(response);
+              $("#res").html(response + "<br><h1>Stop everything...</h1>");
+            }
+          });
+
+        });
+
+      $('.step').click(function() {
+          var id = this.id;
+          console.log("Button " + id + " is clicked");
+          $.ajax({
+            url: "http://127.0.0.1:5000/step?sid="+id,
+            success: function(response) {
+              // here you do whatever you want with the response variable
+              console.log(response);
+              $("#res").html("<br><h1>"+ response + "</h1>");
+            }
+          });
+
+      });
+
+      $('#send').click(function() {
+          var scode = $('#serial').val();
+          console.log("Serial Code: " + scode);
+
+          $.ajax({
+            url: "http://127.0.0.1:5000/serial?scode="+scode,
+            success: function(response) {
+              // here you do whatever you want with the response variable
+              console.log(response);
+              $("#res").html("<br><h1>"+ response + "</h1>");
+            }
+          });
+
+      });
+
+      $('#icb-send').click(function() {
+          var itime = $('#incubation').val();
+          console.log("Incubation Time: " + itime);
+
+          $.ajax({
+            url: "http://127.0.0.1:5000/step?id=1&itime="+itime,
+            success: function(response) {
+              // here you do whatever you want with the response variable
+              console.log(response);
+              $("#res").html("<br><h1>"+ response + "</h1>");
+            }
+          });
+
+      });
+
+      $('#lss-send').click(function() {
+          var ltime = $('#lss').val();
+          console.log("Lysis Time: " + ltime);
+
+          $.ajax({
+            url: "http://127.0.0.1:5000/step?id=4&ltime="+ltime,
+            success: function(response) {
+              // here you do whatever you want with the response variable
+              console.log(response);
+              $("#res").html("<br><h1>"+ response + "</h1>");
+            }
+          });
+
+      });
+
+    </script>
+
+
+
+    <nav class="footer">
+      <p>©2017 Designed by <a href="http://imnash.me/" title="Nash's website.">Nash</a></p>
+    </nav>
+
+
+  </body>
+
+</html>
+<!--# code modified by Nash for demostration usage on 09/26/2017-->

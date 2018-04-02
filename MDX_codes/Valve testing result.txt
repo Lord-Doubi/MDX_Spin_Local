@@ -1,0 +1,27 @@
+n == 6
+
+valve 1:
+x = 1140
+r = 0
+valve 2:
+x = 1053
+r = 23
+valve 3:
+x = 1068
+r = 38
+valve 4:
+x = 1902(+n*833.3333);
+r = 49
+
+wash 1(valve side on the right):
+x = 1268
+r = 32
+
+wash 2:
+x = 1230
+
+Code:
+/1w250x10y2000R\r\n
+finding zero 
+'/1V10000N2Z10000R\r\n'
+r = 32
